@@ -16,7 +16,7 @@
       "dom"
     ],
     "paths": {
-      "@app-models/*": "app/shared/models/*"
+      "@app-models/*": ["app/shared/models/*"]
     }
   }
 }
