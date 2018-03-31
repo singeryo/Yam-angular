@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {isNullOrUndefined} from 'util';
+import {stringDistance} from 'codelyzer/util/utils';
+import {containerStart} from '@angular/core/src/render3/instructions';
 
 @Injectable()
 export class RulesService {
@@ -9,29 +11,33 @@ export class RulesService {
 
     /**
      *
-     * @param acc
-     * @param val
+     * @param acc: Object
+     * @param val: number
      * @returns {any}
      *
-     * Meant to be used with reduce,
+     * Meant to be used with Array.reduce(),
      * returns object containing occurrences of array items
+     *
+     * Need to feed second reduce argument with {} or function will skip first iteration
      */
-    occurences = (acc, val) => {
+    occurrences = (acc, val) => {
         if (isNullOrUndefined(acc[val])) {
             acc[val] = 0;
         }
         acc[val]++;
         return acc;
-    }
-
-
-    arrayUnique(value, index, self) {
-        // Filter out all duplicates
-        return self.indexOf(value) === index;
-    }
+    };
 
     threeOfKind(dice: number[]): boolean | number {
-        return false;
+        const hasThreeOfKind = Object
+            .values(dice.reduce(this.occurrences, {}))
+            .find(item => item > 2) > 0;
+
+        if (!hasThreeOfKind) {
+            return false;
+        }
+
+        return dice.reduce((acc, val) => acc + val)
     }
 
     fourOfKind(dice: number[]): boolean | number {
