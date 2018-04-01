@@ -84,9 +84,8 @@ export class RulesService {
      * @returns {boolean | number}
      */
     fullHouse(dice: number[]): boolean | number {
-        // Occurrence values are either 2,3 or 3,2
-        return JSON.stringify([2, 3]) ===
-            JSON.stringify(this.occurrenceValues(dice).sort()) ? points.fullHouse : false;
+        const occValues = this.occurrenceValues(dice);
+        return occValues.includes(2) && occValues.includes(3) ? points.fullHouse : false;
     }
 
     /**
