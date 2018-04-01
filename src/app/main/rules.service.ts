@@ -22,13 +22,20 @@ export class RulesService {
      *
      * Need to feed second reduce argument with {} or function will skip first iteration
      */
-    occurrences = (acc, val) => {
+    occurrencesReducer = (acc, val) => {
         if (isNullOrUndefined(acc[val])) {
             acc[val] = 0;
         }
         acc[val]++;
         return acc;
     };
+
+    /**
+     *
+     * @param {number[]} array
+     * @returns {{}}
+     */
+    occurrences = (array: number[]) => array.reduce(this.occurrencesReducer, {});
 
     /**
      *
@@ -39,32 +46,62 @@ export class RulesService {
      */
     hasNOccurrences(dice: number[], occurrences: number) {
         return Object
-            .values(dice.reduce(this.occurrences, {}))
+            .values(this.occurrences(dice))
             .some(item => item >= occurrences);
     }
 
+    /**
+     *
+     * @param {number[]} dice
+     * @returns {boolean | number}
+     */
     threeOfKind(dice: number[]): boolean | number {
         return this.hasNOccurrences(dice, 3) ? points.threeOfKind(dice) : false;
     }
 
+    /**
+     *
+     * @param {number[]} dice
+     * @returns {boolean | number}
+     */
     fourOfKind(dice: number[]): boolean | number {
         return this.hasNOccurrences(dice, 4) ? points.fourOfKind(dice) : false;
     }
 
+    /**
+     *
+     * @param {number[]} dice
+     * @returns {boolean | number}
+     */
     fullHouse(dice: number[]): boolean | number {
         // Occurrence values are either 2,3 or 3,2
         return JSON.stringify([2, 3]) ===
-            JSON.stringify(Object.values(dice.reduce(this.occurrences, {})).sort()) ? points.fullHouse : false;
+            JSON.stringify(Object.values((this.occurrences(dice))).sort()) ? points.fullHouse : false;
     }
 
+    /**
+     *
+     * @param {number[]} dice
+     * @returns {boolean | number}
+     */
     smallStraight(dice: number[]): boolean | number {
         return false;
     }
 
+    /**
+     *
+     * @param {number[]} dice
+     * @returns {boolean | number}
+     */
     largeStraight(dice: number[]): boolean | number {
         return false;
     }
 
+    /**
+     *
+     * @param {number[]} dice
+     * @returns {boolean | number}
+     */
     yam(dice: number[]): boolean | number {
         return false;
     }

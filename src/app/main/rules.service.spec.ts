@@ -15,12 +15,12 @@ describe('RulesService', () => {
 
     it('Should count 1, 2, 3', inject([RulesService], (service: RulesService) => {
         const test = [1, 2, 2, 3, 3, 3];
-        expect(test.reduce(service.occurrences, {})).toEqual({ 1: 1, 2: 2, 3: 3 });
+        expect((service.occurrences(test))).toEqual({ 1: 1, 2: 2, 3: 3 });
     }));
 
     it('Should count 1, 2, 3 array', inject([RulesService], (service: RulesService) => {
         const test = [2, 2, 2, 3, 3];
-        expect(Object.values(test.reduce(service.occurrences, {})))
+        expect(Object.values((service.occurrences(test))))
             .toEqual([3, 2]);
     }));
 
