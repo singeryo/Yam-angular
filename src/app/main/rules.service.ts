@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {isNullOrUndefined} from 'util';
-import {stringDistance} from 'codelyzer/util/utils';
-import {containerStart} from '@angular/core/src/render3/instructions';
+import {points} from '@app-config/config';
 
+/**
+ * Service meant to inject Yam rules to components
+ */
 @Injectable()
 export class RulesService {
 
@@ -28,24 +30,31 @@ export class RulesService {
         return acc;
     };
 
-    threeOfKind(dice: number[]): boolean | number {
-        const hasThreeOfKind = Object
+    /**
+     *
+     * @param {number[]} dice
+     * @param {number} occurrences
+     *
+     * Check if dice array contains N occurrences of a same number
+     */
+    hasNOccurrences(dice: number[], occurrences: number) {
+        return Object
             .values(dice.reduce(this.occurrences, {}))
-            .find(item => item > 2) > 0;
+            .some(item => item >= occurrences);
+    }
 
-        if (!hasThreeOfKind) {
-            return false;
-        }
-
-        return dice.reduce((acc, val) => acc + val)
+    threeOfKind(dice: number[]): boolean | number {
+        return this.hasNOccurrences(dice, 3) ? points.threeOfKind(dice) : false;
     }
 
     fourOfKind(dice: number[]): boolean | number {
-        return false;
+        return this.hasNOccurrences(dice, 4) ? points.fourOfKind(dice) : false;
     }
 
     fullHouse(dice: number[]): boolean | number {
-        return false;
+        // Occurrence values are either 2,3 or 3,2
+        return JSON.stringify([2, 3]) ===
+            JSON.stringify(Object.values(dice.reduce(this.occurrences, {})).sort()) ? points.fullHouse : false;
     }
 
     smallStraight(dice: number[]): boolean | number {
