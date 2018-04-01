@@ -33,9 +33,20 @@ export class RulesService {
     /**
      *
      * @param {number[]} array
-     * @returns {{}}
+     * @returns {Object}
+     *
+     * Returns object containing occurrences of array items ex: {1: 2, 5: 1, 6: 2}
      */
     occurrences = (array: number[]) => array.reduce(this.occurrencesReducer, {});
+
+    /**
+     *
+     * @param {number[]} array
+     * @returns {Array}
+     *
+     * Returns array of occurrences. Better for array manipulation
+     */
+    occurrenceValues = (array: number[]) => Object.values(this.occurrences(array));
 
     /**
      *
@@ -45,8 +56,7 @@ export class RulesService {
      * Check if dice array contains N occurrences of a same number
      */
     hasNOccurrences(dice: number[], occurrences: number) {
-        return Object
-            .values(this.occurrences(dice))
+        return this.occurrenceValues(dice)
             .some(item => item >= occurrences);
     }
 
@@ -76,7 +86,7 @@ export class RulesService {
     fullHouse(dice: number[]): boolean | number {
         // Occurrence values are either 2,3 or 3,2
         return JSON.stringify([2, 3]) ===
-            JSON.stringify(Object.values((this.occurrences(dice))).sort()) ? points.fullHouse : false;
+            JSON.stringify(this.occurrenceValues(dice).sort()) ? points.fullHouse : false;
     }
 
     /**
