@@ -50,14 +50,37 @@ export class RulesService {
 
     /**
      *
-     * @param {number[]} dice
-     * @param {number} occurrences
+     * @param {number[]} array
+     * @param {number} n
+     * @returns {boolean]
      *
-     * Check if dice array contains N occurrences of a same number
+     * Check if array contains N n of a same number
      */
-    hasNOccurrences(dice: number[], occurrences: number) {
-        return this.occurrenceValues(dice)
-            .some(item => item >= occurrences);
+    hasNOccurrences(array: number[], n: number): boolean {
+        return this.occurrenceValues(array)
+            .some(item => item >= n);
+    }
+
+    /**
+     *
+     * @param {number[]} array
+     * @param {number} n
+     * @returns {boolean}
+     */
+    hasNConsecutiveNumbers(array: number[], n: number): boolean {
+        let counter = 0;
+
+        for (let i = 1; i < array.length; i++) {
+            if (array[i] === array[i - 1] + 1) {
+                counter++;
+            } else {
+                counter = 0;
+            }
+            if (counter === n - 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -94,7 +117,7 @@ export class RulesService {
      * @returns {boolean | number}
      */
     smallStraight(dice: number[]): boolean | number {
-        return false;
+        return this.hasNConsecutiveNumbers(dice, 4) ? points.smallStraight : false;
     }
 
     /**
@@ -103,7 +126,7 @@ export class RulesService {
      * @returns {boolean | number}
      */
     largeStraight(dice: number[]): boolean | number {
-        return false;
+        return this.hasNConsecutiveNumbers(dice, 5) ? points.largeStraight : false;
     }
 
     /**
@@ -112,7 +135,7 @@ export class RulesService {
      * @returns {boolean | number}
      */
     yam(dice: number[]): boolean | number {
-        return false;
+        return this.occurrenceValues(dice).length === 1 ? points.yam : false;
     }
 
 }

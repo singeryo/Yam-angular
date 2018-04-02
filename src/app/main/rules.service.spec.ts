@@ -97,7 +97,7 @@ describe('RulesService', () => {
     }));
 
     it('Should be Yam', inject([RulesService], (service: RulesService) => {
-        const test = [2, 2, 5, 5, 5];
+        const test = [5, 5, 5, 5, 5];
         expect(service.yam(test))
             .toEqual(50);
     }));
