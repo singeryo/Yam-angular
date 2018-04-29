@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
 import { FooterComponent } from './footer/footer.component';
+import { DiceComponent } from './main/dice/dice/dice.component';
+import {DiceService} from './main/dice/dice.service';
 
 
 @NgModule({
@@ -13,12 +15,13 @@ import { FooterComponent } from './footer/footer.component';
     AppComponent,
     HeaderComponent,
     MainComponent,
-    FooterComponent
+    FooterComponent,
+    DiceComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [DiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
