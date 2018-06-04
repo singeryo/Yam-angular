@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {DiceService} from '../dice.service';
 
 import {Observable} from 'rxjs/Observable';
@@ -10,27 +10,30 @@ import {Dice} from '../../../shared/models/dice';
   templateUrl: './dice.component.html',
   styleUrls: ['./dice.component.css']
 })
-export class DiceComponent implements OnInit {
+export class DiceComponent implements AfterViewInit {
 
-    @Input() diceCount = 5;
+    @Input() initialDiceCount = 5;
+    diceCount = 0;
     @Input() diceFaces = 6;
 
     dices: Dice[] = [];
 
-    _count = Observable.of(this.diceCount);
 
     constructor(public diceService: DiceService) { }
 
-    ngOnInit() {
-        this._count.subscribe(count => this.initDices(count));
+    ngAfterViewInit() {
+        this.initDices(this.diceCount);
     }
 
     addDice() {
         this.diceCount++;
+        this.dices.push(new Dice());
     }
 
     initDices(count: number) {
-        console.log(count);
+        for (let i = 0; i < this.initialDiceCount; i = i + 1) {
+            this.addDice();
+        }
     }
 
 }

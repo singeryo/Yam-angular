@@ -8,6 +8,7 @@ import { MainComponent } from './main/main.component';
 import { FooterComponent } from './footer/footer.component';
 import { DiceComponent } from './main/dice/dice/dice.component';
 import {DiceService} from './main/dice/dice.service';
+import { GameComponent } from './main/game/game.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {DiceService} from './main/dice/dice.service';
     HeaderComponent,
     MainComponent,
     FooterComponent,
-    DiceComponent
+    DiceComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule
