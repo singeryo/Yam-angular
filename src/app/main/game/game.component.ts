@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Player} from '../../shared/models/player';
 import {GameService} from '../services/game.service';
+import {scores} from '../../shared/config/configs/rules';
 
 @Component({
     selector: 'app-game',
@@ -10,14 +11,13 @@ import {GameService} from '../services/game.service';
 export class GameComponent implements OnInit {
 
     players: Player[];
-    gameService: GameService;
+    scores = Object.values(scores);
 
-    constructor(gameService: GameService) {
+    constructor(public gameService: GameService) {
         this.players = [
             new Player('Oliver'),
             new Player('Kem')
         ];
-        this.gameService = gameService;
     }
 
     ngOnInit() {

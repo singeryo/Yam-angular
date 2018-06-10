@@ -1,3 +1,19 @@
-<div *ngFor="let player of players">
-    {{ player.name }}
+<div class="table">
+    <table>
+        <thead>
+            <tr>
+                <td>Player</td>
+                <td *ngFor="let score of scores">{{ score }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let player of players">
+                <td>{{ player.name }}</td>
+                <td *ngFor="let score of scores">
+                    {{ player.scoreTable[score].filled ? player.scoreTable[score].val : '' }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+

@@ -11,4 +11,5 @@ export class ScoreTable {
     smallStraight: number;
     largeStraight: number;
     yam: number;
+    chance: number;
 }

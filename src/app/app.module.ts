@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DiceComponent } from './main/dice/dice/dice.component';
 import {DiceService} from './main/dice/dice.service';
 import { GameComponent } from './main/game/game.component';
+import {GameService} from './main/services/game.service';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { GameComponent } from './main/game/game.component';
   imports: [
     BrowserModule
   ],
-  providers: [DiceService],
+  providers: [DiceService, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
