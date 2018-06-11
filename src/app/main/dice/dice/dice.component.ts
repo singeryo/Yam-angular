@@ -1,9 +1,8 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {DiceService} from '../dice.service';
 
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {Dice} from '../../../shared/models/dice';
+import {DiceService} from '../../services/dice.service';
 
 @Component({
   selector: 'app-dice',
@@ -19,7 +18,7 @@ export class DiceComponent implements AfterViewInit {
     dices: Dice[] = [];
 
 
-    constructor(public diceService: DiceService) { }
+    constructor(diceService: DiceService) { }
 
     ngAfterViewInit() {
         this.initDices(this.diceCount);
