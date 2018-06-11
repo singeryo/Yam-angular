@@ -6,11 +6,14 @@
                 <td *ngFor="let score of scores">{{ score }}</td>
             </tr>
         </thead>
+        Current Player : {{ gameService.currentPlayer.name }}
         <tbody>
             <tr *ngFor="let player of players">
                 <td>{{ player.name }}</td>
                 <td *ngFor="let score of scores">
-                    {{ player.scoreTable[score].filled ? player.scoreTable[score].val : '' }}
+                    <button [disabled]="player.scoreTable[score].filled" (click)="register(score, 20)">
+                        {{ player.scoreTable[score].filled ? player.scoreTable[score].val : '' }}
+                    </button>
                 </td>
             </tr>
         </tbody>

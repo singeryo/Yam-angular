@@ -1,5 +1,4 @@
 import {scores} from '../config/configs/rules';
-import {Observable} from 'rxjs/Observable';
 
 class PlayerType {
 }
@@ -15,7 +14,8 @@ export class Player {
     }
 
     register(score, value) {
-        this.scoreTable[score] = value;
+        this.scoreTable[score].val = value;
+        this.scoreTable[score].filled = true;
     }
 
     startTurn() {

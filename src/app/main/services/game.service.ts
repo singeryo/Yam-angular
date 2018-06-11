@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Player} from '../../shared/models/player';
-import {Observable} from 'rxjs/Observable';
-import {from} from 'rxjs/observable/from';
-import {scores} from '../../shared/config/configs/rules';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
@@ -35,10 +32,10 @@ export class GameService {
                 } else if (this.gameComplete()) {
                     // game completed
                 } else {
+                    i = (i < players.length - 1) ? ++i : 0;
                     // Register score and pass turn to next player
                     this.currentPlayer.register(registeredValue.score, registeredValue.value);
-                    this.currentPlayer = players[++i];
-                    this.currentPlayer.startTurn();
+                    this.currentPlayer = players[i];
                 }
             }
         )
