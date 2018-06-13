@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 
 import 'rxjs/add/observable/of';
-import {Dice} from '../../../shared/models/dice';
+import {Die} from '../../../shared/models/dice';
 import {DiceService} from '../../services/dice.service';
 
 @Component({
@@ -15,24 +15,32 @@ export class DiceComponent implements AfterViewInit {
     diceCount = 0;
     @Input() diceFaces = 6;
 
-    dices: Dice[] = [];
+    dice: Die[] = [];
 
 
     constructor(diceService: DiceService) { }
 
     ngAfterViewInit() {
-        this.initDices(this.diceCount);
+        this.initDices();
     }
 
     addDice() {
         this.diceCount++;
-        this.dices.push(new Dice());
+        this.dice.push(new Die(this.diceFaces));
     }
 
-    initDices(count: number) {
+    initDices() {
         for (let i = 0; i < this.initialDiceCount; i = i + 1) {
             this.addDice();
         }
+    }
+
+    throwAllDice() {
+        this.throwDice(this.dice);
+    }
+
+    throwDice(dice: Die[]) {
+        dice.forEach((die) => die.throw());
     }
 
 }

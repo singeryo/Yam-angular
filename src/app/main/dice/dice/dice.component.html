@@ -1,4 +1,4 @@
 <div class="dice-container">
-    <div *ngFor="let dice of dices">1</div>
-    <button (click)="addDice()">Add a dice !</button>
+    <div *ngFor="let die of dice">{{ die.currentFace }}</div>
+    <button (click)="throwAllDice()">Throw dice</button>
 </div>
