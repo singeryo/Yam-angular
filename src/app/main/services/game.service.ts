@@ -1,30 +1,24 @@
 import {Injectable} from '@angular/core';
 import {Player} from '../../shared/models/player';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {TurnService} from './turn.service';
 
 @Injectable()
 export class GameService {
 
 
-    gameProcessSource = new BehaviorSubject<{score: string, value: number}>(null);
-    gameProgress = this.gameProcessSource.asObservable();
-
     currentPlayer: Player;
 
-    constructor() {
+    constructor(public turnService: TurnService) {
     }
 
     gameComplete() {
         return false;
     }
 
-    registerScore(score, value) {
-        this.gameProcessSource.next({score: score, value: value});
-    }
 
     runGame(players: Player[]) {
         let i = 0;
-        this.gameProgress.subscribe(
+        this.turnService.turnEnd.subscribe(
             (registeredValue) => {
                 if (!registeredValue) {
                     // Game just started

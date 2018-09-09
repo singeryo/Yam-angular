@@ -11,6 +11,7 @@ import {DiceService} from './main/services/dice.service'
 import { GameComponent } from './main/game/game.component';
 import {GameService} from './main/services/game.service';
 import {RulesService} from './main/services/rules.service';
+import {TurnService} from './main/services/turn.service';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import {RulesService} from './main/services/rules.service';
   imports: [
     BrowserModule
   ],
-  providers: [DiceService, GameService, RulesService],
+  providers: [DiceService, GameService, RulesService, TurnService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
