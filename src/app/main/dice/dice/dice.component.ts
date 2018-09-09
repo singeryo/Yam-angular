@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import 'rxjs/add/observable/of';
 import {Die} from '../../../shared/models/dice';
@@ -14,11 +14,12 @@ export class DiceComponent implements AfterViewInit {
     @Input() initialDiceCount = 5;
     diceCount = 0;
     @Input() diceFaces = 6;
+    @Output() throw = new EventEmitter();
 
     dice: Die[] = [];
 
 
-    constructor(diceService: DiceService) { }
+    constructor(public diceService: DiceService) { }
 
     ngAfterViewInit() {
         this.initDices();
@@ -37,10 +38,12 @@ export class DiceComponent implements AfterViewInit {
 
     throwAllDice() {
         this.throwDice(this.dice);
+        this.throw.emit(true);
     }
 
     throwDice(dice: Die[]) {
         dice.forEach((die) => die.throw());
+        this.diceService.push(dice.map(item => item.value()));
     }
 
 }

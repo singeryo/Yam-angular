@@ -8,6 +8,10 @@ export class Die {
         this.currentFace = Math.floor(Math.random() * Math.floor(this.faces)) + 1;
     }
 
+    value() {
+        return this.currentFace;
+    }
+
     constructor(faces: number) {
         this.faces = faces;
         this.currentFace = 1;

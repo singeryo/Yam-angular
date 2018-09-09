@@ -10,4 +10,12 @@ export class DiceService {
 
     }
 
+    push(dice: number[]) {
+        this.currentDiceValues = dice;
+    }
+
+    values() {
+        return this.currentDiceValues;
+    }
+
 }

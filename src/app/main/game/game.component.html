@@ -1,3 +1,4 @@
+<app-dice [initialDiceCount]="5" [diceFaces]="6" (throw)="onThrow()"></app-dice>
 <div class="table">
     Current Player : {{ gameService.currentPlayer.name }}
     <table>
@@ -11,8 +12,8 @@
             <tr *ngFor="let player of players">
                 <td>{{ player.name }}</td>
                 <td *ngFor="let score of scores">
-                    <button [disabled]="player.scoreTable[score].filled" (click)="register(score, 20)">
-                        {{ player.scoreTable[score].filled ? player.scoreTable[score].val : '' }}
+                    <button [disabled]="player.scoreTable[score].filled || !possibleScoreEntries[score]" (click)="register(score, possibleScoreEntries[score])">
+                        {{ player.scoreTable[score].filled ? player.scoreTable[score].val : possibleScoreEntries[score] }}
                     </button>
                 </td>
             </tr>
