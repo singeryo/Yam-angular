@@ -15,6 +15,10 @@ export class GameService {
         return false;
     }
 
+    isCurrentPlayer(player: Player) {
+        return player.name === this.currentPlayer.name;
+    }
+
 
     runGame(players: Player[]) {
         let i = 0;

@@ -12,8 +12,8 @@
             <tr *ngFor="let player of players">
                 <td>{{ player.name }}</td>
                 <td *ngFor="let score of scores">
-                    <button [disabled]="player.scoreTable[score].filled || !possibleScoreEntries[score]" (click)="register(score, possibleScoreEntries[score])">
-                        {{ player.scoreTable[score].filled ? player.scoreTable[score].val : possibleScoreEntries[score] }}
+                    <button [disabled]="shouldBeDisabled(score, player)" (click)="register(score, possibleScoreEntries[score])">
+                        {{ toBeDisplayed(score, player) }}
                     </button>
                 </td>
             </tr>
