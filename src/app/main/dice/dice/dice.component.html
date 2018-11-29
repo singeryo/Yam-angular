@@ -1,4 +1,9 @@
-<div class="dice-container">
-    <div *ngFor="let die of dice">{{ die.currentFace }}</div>
-    <button (click)="throwAllDice()">Throw dice</button>
+<div class="my-5">
+    <div class="dice-container my-3">
+        <span *ngFor="let die of dice" class="die" (click)="toggleSelected(die)" [class.selected]="die.selected" [class.selectable]="turnService.turnStarted() && turnService.canThrowDice()">{{ die.currentFace }}</span>
+
+    </div>
+    <div>
+        <button *ngIf="turnService.canThrowDice()" (click)="throwAllDice()" class="dice-throw py-2 px-4">Throw dice</button>
+    </div>
 </div>

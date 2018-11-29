@@ -9,7 +9,7 @@ import {RulesService} from '../services/rules.service';
 @Component({
     selector: 'app-game',
     templateUrl: './game.component.html',
-    styleUrls: ['./game.component.css']
+    styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
 
@@ -26,8 +26,8 @@ export class GameComponent implements OnInit {
      */
     constructor(public gameService: GameService, public diceService: DiceService, public turnService: TurnService, public rulesService: RulesService) {
         this.players = [
-            new Player('Oliver'),
-            new Player('Kem')
+            new Player('Stan'),
+            new Player('Satan')
         ];
     }
 
@@ -39,7 +39,7 @@ export class GameComponent implements OnInit {
      */
     shouldBeDisabled(score, player: Player) {
         // Is disabled if it is not players turn or score is already filled
-        return (!this.gameService.isCurrentPlayer(player) || player.scoreTable[score].filled);
+        return (!this.gameService.isCurrentPlayer(player) || player.scoreTable[score].filled || !this.turnService.turnStarted());
     }
 
     /**
@@ -78,10 +78,13 @@ export class GameComponent implements OnInit {
      * @param score
      *
      * What to do when registering score
+     * @param value
+     * @param player
      */
-    register(score) {
-        //let values = this.diceService.values();
-        // this.gameService.registerScore(score, value);
+    register(score, value, player: Player) {
+        if (!this.shouldBeDisabled(score, player)) {
+            this.turnService.registerScore(score, value);
+        }
     }
 
     ngOnInit() {

@@ -1,7 +1,7 @@
-<app-dice [initialDiceCount]="5" [diceFaces]="6" (throw)="onThrow()"></app-dice>
-<div class="table">
-    Current Player : {{ gameService.currentPlayer.name }}
-    <table>
+<div class="table container text-center">
+    <h3>C'est au tour de : {{ gameService.currentPlayer.name }}</h3>
+    <app-dice [initialDiceCount]="5" [diceFaces]="6" (throw)="onThrow()"></app-dice>
+    <table id="scores" class="mx-auto my-4">
         <thead>
             <tr>
                 <td>Player</td>
@@ -11,10 +11,8 @@
         <tbody>
             <tr *ngFor="let player of players">
                 <td>{{ player.name }}</td>
-                <td *ngFor="let score of scores">
-                    <button [disabled]="shouldBeDisabled(score, player)" (click)="register(score, possibleScoreEntries[score])">
-                        {{ toBeDisplayed(score, player) }}
-                    </button>
+                <td *ngFor="let score of scores" (click)="register(score, possibleScoreEntries[score], player)" [class.active]="!shouldBeDisabled(score, player)" class="score">
+                    {{ toBeDisplayed(score, player) }}
                 </td>
             </tr>
         </tbody>

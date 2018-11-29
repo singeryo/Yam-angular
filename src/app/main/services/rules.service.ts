@@ -68,6 +68,8 @@ export class RulesService {
     hasNConsecutiveNumbers = (array: number[], n: number): boolean => {
         let counter = 0;
 
+        array.sort();
+
         for (let i = 1; i < array.length; i++) {
             if (array[i] === array[i - 1] + 1) {
                 counter++;

@@ -15,11 +15,19 @@ export class GameService {
         return false;
     }
 
+    /**
+     * @param {Player} player
+     * @return {boolean}
+     */
     isCurrentPlayer(player: Player) {
         return player.name === this.currentPlayer.name;
     }
 
 
+    /**
+     *
+     * @param {Player[]} players
+     */
     runGame(players: Player[]) {
         let i = 0;
         this.turnService.turnEnd.subscribe(
