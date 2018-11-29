@@ -4,13 +4,13 @@
     <table id="scores" class="mx-auto my-4">
         <thead>
             <tr>
-                <td>Player</td>
+                <td>Joueur</td>
                 <td *ngFor="let score of scores">{{ score }}</td>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let player of players">
-                <td>{{ player.name }}</td>
+                <td class="player-name" [class.active]="player.name === gameService.currentPlayer.name">{{ player.name }}</td>
                 <td *ngFor="let score of scores" (click)="register(score, possibleScoreEntries[score], player)" [class.active]="!shouldBeDisabled(score, player)" class="score">
                     {{ toBeDisplayed(score, player) }}
                 </td>

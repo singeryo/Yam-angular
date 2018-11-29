@@ -8,12 +8,13 @@
     -o-transition: all 0.25s;
     transition: all 0.25s;
     &.active {
-      border-top: 1px solid #3db062;
       &:hover {
         cursor: pointer;
-        background-color: #ddd;
+        background-color: #eee;
       }
     }
-
+  }
+  .active {
+    color: #ff9421;
   }
 }

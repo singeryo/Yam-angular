@@ -1,9 +1,12 @@
 <div class="my-5">
     <div class="dice-container my-3">
-        <span *ngFor="let die of dice" class="die" (click)="toggleSelected(die)" [class.selected]="die.selected" [class.selectable]="turnService.turnStarted() && turnService.canThrowDice()">{{ die.currentFace }}</span>
+        <span *ngFor="let die of dice" class="die" (click)="toggleSelected(die)"
+              [ngClass]="{'selected': die.selected, 'selectable': (turnService.turnStarted() && turnService.canThrowDice()), 'inactive': !turnService.turnStarted()}" >
+            {{ die.currentFace }}
+        </span>
 
     </div>
     <div>
-        <button *ngIf="turnService.canThrowDice()" (click)="throwAllDice()" class="dice-throw py-2 px-4">Throw dice</button>
+        <button *ngIf="turnService.canThrowDice()" (click)="throwAllDice()" class="dice-throw py-2 px-4">Lancer les dés !</button>
     </div>
 </div>

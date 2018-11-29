@@ -14,13 +14,13 @@ const scores = {
     four: '4',
     five: '5',
     six: '6',
-    threeOfKind: 'tok',
-    fourOfKind: 'fok',
-    fullHouse: 'fh',
-    smallStraight: 'ss',
-    largeStraight: 'ls',
-    yam: 'yam',
-    chance: 'ch'
+    threeOfKind: 'Brelan',
+    fourOfKind: 'Carré',
+    fullHouse: 'Full',
+    smallStraight: 'Petite suite',
+    largeStraight: 'Grande suite',
+    yam: 'Yam',
+    chance: 'Chance'
 };
 
 export {points, scores};

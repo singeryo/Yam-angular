@@ -24,6 +24,9 @@
       background-color: #89ecb1;
       border: none;
     }
+    &.inactive {
+      border-color: #ccc;
+    }
   }
 }
 
