@@ -150,18 +150,18 @@ export class RulesService {
     };
 
     rulesMapping = {
-        [scores.one]: (dice, score) => this.oneToSix(dice, score),
-        [scores.two]: (dice, score) => this.oneToSix(dice, score),
-        [scores.three]: (dice, score) => this.oneToSix(dice, score),
-        [scores.four]: (dice, score) => this.oneToSix(dice, score),
-        [scores.five]: (dice, score) => this.oneToSix(dice, score),
-        [scores.six]: (dice, score) => this.oneToSix(dice, score),
-        [scores.threeOfKind]: (dice, score) => this.threeOfKind(dice),
-        [scores.fourOfKind]: (dice, score) => this.fourOfKind(dice),
-        [scores.fullHouse]: (dice, score) => this.fullHouse(dice),
-        [scores.smallStraight]: (dice, score) => this.smallStraight(dice),
-        [scores.largeStraight]: (dice, score) => this.largeStraight(dice),
-        [scores.yam]: (dice, score) => this.yam(dice),
+        [scores.one]: this.oneToSix,
+        [scores.two]: this.oneToSix,
+        [scores.three]: this.oneToSix,
+        [scores.four]: this.oneToSix,
+        [scores.five]: this.oneToSix,
+        [scores.six]: this.oneToSix,
+        [scores.threeOfKind]: this.threeOfKind,
+        [scores.fourOfKind]: this.fourOfKind,
+        [scores.fullHouse]: this.fullHouse,
+        [scores.smallStraight]: this.smallStraight,
+        [scores.largeStraight]: this.largeStraight,
+        [scores.yam]: this.yam,
         [scores.chance]: (dice, score) => dice.reduce((val, acc) => val + acc)
     };
 
@@ -175,7 +175,7 @@ export class RulesService {
     getScoreValues(dice: number[]) {
         const scoreValues = {};
 
-        Object.values(scores).forEach(score => {
+        Object.keys(this.rulesMapping).forEach(score => {
             Object.assign(scoreValues, {[score] : this.rulesMapping[score](dice, +score)});
         });
 

@@ -14,13 +14,19 @@ const scores = {
     four: '4',
     five: '5',
     six: '6',
+    bonus: 'Prime',
     threeOfKind: 'Brelan',
     fourOfKind: 'Carré',
     fullHouse: 'Full',
     smallStraight: 'Petite suite',
     largeStraight: 'Grande suite',
     yam: 'Yam',
-    chance: 'Chance'
+    chance: 'Chance',
+    total: 'Total'
+};
+
+const calculatedValues = {
+    [scores.bonus]: (scoreTable) => {}
 };
 
 export {points, scores};
