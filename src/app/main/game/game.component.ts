@@ -38,8 +38,13 @@ export class GameComponent implements OnInit {
      * Define here if you should be able to interact with score
      */
     shouldBeDisabled(score, player: Player) {
-        // Is disabled if it is not players turn or score is already filled
-        return (!this.gameService.isCurrentPlayer(player) || player.scoreTable[score].filled || !this.turnService.turnStarted());
+        // Is disabled if it is not players turn, score is already filled or score is calculated
+        return (
+            !this.gameService.isCurrentPlayer(player)
+            || player.scoreTable[score].filled
+            || !this.turnService.turnStarted()
+            || this.rulesService.isCalculated(score)
+        );
     }
 
     /**
@@ -47,10 +52,15 @@ export class GameComponent implements OnInit {
      * @param player
      *
      * What value should be displayed on score entry ?
+     * Either players entered score or calculated entry or empty string
      */
     toBeDisplayed(score, player: Player) {
         if (player.scoreTable[score].filled) {
             return player.scoreTable[score].val;
+        }
+
+        if (this.rulesService.isCalculated(score)) {
+            return this.rulesService.calculatedValues[score](player.scoreTable);
         }
 
         /**

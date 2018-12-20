@@ -4,7 +4,8 @@ const points = {
     fullHouse: 25,
     smallStraight: 35,
     largeStraight: 40,
-    yam: 50
+    yam: 50,
+    bonus: 35
 };
 
 const scores = {
@@ -23,10 +24,6 @@ const scores = {
     yam: 'Yam',
     chance: 'Chance',
     total: 'Total'
-};
-
-const calculatedValues = {
-    [scores.bonus]: (scoreTable) => {}
 };
 
 export {points, scores};

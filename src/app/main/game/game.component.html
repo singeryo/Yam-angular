@@ -5,13 +5,13 @@
         <thead>
             <tr>
                 <td>Joueur</td>
-                <td *ngFor="let score of scores">{{ score }}</td>
+                <td *ngFor="let score of scores" [class.font-italic]="rulesService.isCalculated(score)">{{ score }}</td>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let player of players">
                 <td class="player-name" [class.active]="player.name === gameService.currentPlayer.name">{{ player.name }}</td>
-                <td *ngFor="let score of scores" (click)="register(score, possibleScoreEntries[score], player)" [class.active]="!shouldBeDisabled(score, player)" class="score">
+                <td *ngFor="let score of scores" (click)="register(score, possibleScoreEntries[score], player)" [class.font-italic]="rulesService.isCalculated(score)" [class.active]="!shouldBeDisabled(score, player)" class="score">
                     {{ toBeDisplayed(score, player) }}
                 </td>
             </tr>
